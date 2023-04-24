@@ -420,7 +420,9 @@ def get_informative_neurons(pos, neg, k):
     correlation_vals = []
     pos_ = pos + nematode(pos.shape[0], pos.shape[1])
     neg_ = neg + nematode(neg.shape[0], neg.shape[1])
-    neuron_corr = np.corrcoef(np.hstack((np.concatenate((pos_, neg_), axis=0), np.concatenate((np.ones(len(pos)), np.zeros(len(neg))), axis=0).reshape((-1,1)))), rowvar=False)[-1, :-1]
+    neuron_corr = np.corrcoef(np.hstack(
+        (np.concatenate((pos_, neg_), axis=0), np.concatenate((np.ones(len(pos)), np.zeros(len(neg))), axis=0).reshape((-1,1)))
+        ), rowvar=False)[-1, :-1]
     top_corr = sorted(list(zip(neuron_corr, list(range(len(neuron_corr))))), key=(lambda v: v[0]), reverse=True)
     
     sorted_neurons = [v[1] for v in top_corr]
